@@ -18,5 +18,13 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "tina": {
+      "tags": []
+    },
+    "tina-e2e": {
+      "tags": [],
+      "implicitDependencies": ["tina"]
+    }
+  }
 }

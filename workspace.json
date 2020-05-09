@@ -1,8 +1,129 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "tina": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/tina",
+      "sourceRoot": "apps/tina/src",
+      "prefix": "dallas-casi",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/tina",
+            "index": "apps/tina/src/index.html",
+            "main": "apps/tina/src/main.ts",
+            "polyfills": "apps/tina/src/polyfills.ts",
+            "tsConfig": "apps/tina/tsconfig.app.json",
+            "aot": true,
+            "assets": ["apps/tina/src/favicon.ico", "apps/tina/src/assets"],
+            "styles": ["apps/tina/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/tina/src/environments/environment.ts",
+                  "with": "apps/tina/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "tina:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "tina:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "tina:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/tina/tsconfig.app.json",
+              "apps/tina/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/tina/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/tina/jest.config.js",
+            "tsConfig": "apps/tina/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/tina/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "tina-e2e": {
+      "root": "apps/tina-e2e",
+      "sourceRoot": "apps/tina-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/tina-e2e/cypress.json",
+            "tsConfig": "apps/tina-e2e/tsconfig.e2e.json",
+            "devServerTarget": "tina:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "tina:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/tina-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/tina-e2e/**"]
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/angular"
   },
   "schematics": {
     "@nrwl/workspace": {
@@ -58,6 +179,14 @@
       "library": {
         "linter": "eslint"
       }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
     }
-  }
+  },
+  "defaultProject": "tina"
 }
