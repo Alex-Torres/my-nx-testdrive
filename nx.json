@@ -25,6 +25,9 @@
     "tina-e2e": {
       "tags": [],
       "implicitDependencies": ["tina"]
+    },
+    "casi-ui": {
+      "tags": []
     }
   }
 }

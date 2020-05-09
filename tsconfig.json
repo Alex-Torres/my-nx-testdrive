@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@dallas-casi/casi-ui": ["libs/casi-ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
