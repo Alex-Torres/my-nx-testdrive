@@ -28,6 +28,17 @@
     },
     "casi-ui": {
       "tags": []
+    },
+    "sample-starter-uikit": {
+      "styles": [
+        "src/styles.scss",
+        "src/assets/scss/app.scss"
+      ],
+      "tags": []
+    },
+    "sample-starter-uikit-e2e": {
+      "tags": [],
+      "implicitDependencies": ["sample-starter-uikit"]
     }
   }
 }

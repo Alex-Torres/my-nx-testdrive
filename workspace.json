@@ -152,6 +152,132 @@
           "style": "scss"
         }
       }
+    },
+    "sample-starter-uikit": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/sample-starter-uikit",
+      "sourceRoot": "apps/sample-starter-uikit/src",
+      "prefix": "dallas-casi",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/sample-starter-uikit",
+            "index": "apps/sample-starter-uikit/src/index.html",
+            "main": "apps/sample-starter-uikit/src/main.ts",
+            "polyfills": "apps/sample-starter-uikit/src/polyfills.ts",
+            "tsConfig": "apps/sample-starter-uikit/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/sample-starter-uikit/src/favicon.ico",
+              "apps/sample-starter-uikit/src/assets"
+            ],
+            "styles": ["apps/sample-starter-uikit/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/sample-starter-uikit/src/environments/environment.ts",
+                  "with": "apps/sample-starter-uikit/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "sample-starter-uikit:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "sample-starter-uikit:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "sample-starter-uikit:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/sample-starter-uikit/tsconfig.app.json",
+              "apps/sample-starter-uikit/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/sample-starter-uikit/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/sample-starter-uikit/jest.config.js",
+            "tsConfig": "apps/sample-starter-uikit/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/sample-starter-uikit/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "sample-starter-uikit-e2e": {
+      "root": "apps/sample-starter-uikit-e2e",
+      "sourceRoot": "apps/sample-starter-uikit-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/sample-starter-uikit-e2e/cypress.json",
+            "tsConfig": "apps/sample-starter-uikit-e2e/tsconfig.e2e.json",
+            "devServerTarget": "sample-starter-uikit:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "sample-starter-uikit:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/sample-starter-uikit-e2e/tsconfig.e2e.json"],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/sample-starter-uikit-e2e/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

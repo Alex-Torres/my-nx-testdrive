@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "nx": "nx",
-    "start": "nx serve",
+    "start": "node --max_old_space_size=8000 nx serve",
     "build": "nx build",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
@@ -36,8 +36,11 @@
     "@angular/platform-browser": "^9.1.0",
     "@angular/platform-browser-dynamic": "^9.1.0",
     "@angular/router": "^9.1.0",
+    "bootstrap": "^4.4.1",
     "core-js": "^2.5.4",
+    "feather-icons": "^4.28.0",
     "rxjs": "~6.5.4",
+    "screenfull": "^5.0.2",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
